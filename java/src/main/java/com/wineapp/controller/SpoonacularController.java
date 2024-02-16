@@ -5,18 +5,18 @@ import java.util.List;
 import com.wineapp.model.WineRecommendation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.wineapp.services.SpoontacularService;
+import com.wineapp.services.SpoonacularService;
 
 @RestController
-public class SpoontacularController {
+public class SpoonacularController {
 
     @Autowired
-    SpoontacularService spoontacularService;
+    SpoonacularService spoonacularService;
     @CrossOrigin
     @RequestMapping(path="/getPairing", method=RequestMethod.GET)
     public WineRecommendation test(@RequestParam String query) {
 
-        return spoontacularService.getWinePairing(query);
+        return spoonacularService.getWinePairing(query);
 
     }
 
