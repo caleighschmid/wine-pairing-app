@@ -8,7 +8,7 @@
             <br>
             <button v-on:click="fetchWineRecommendation">Get Wine Pairings</button>
 
-            <WineRecommendation :wineRec="wineRec" :searchPerformed="searchPerformed" />
+            <WineRecommendation :wineRec="wineRec" :searchPerformed="searchPerformed" :foodInput="foodInput" :invalidSearch="invalidSearch"/>
 
 
         </div>
@@ -26,9 +26,10 @@ export default {
     },
     data() {
         return {
-            foodInput: 'Italian', // Default value, you can set it to an empty string if you prefer
+            foodInput: 'Italian', // Default value
             wineRec: null,
             searchPerformed: false,
+            invalidSearch: '',
         };
     },
     methods: {
@@ -39,9 +40,10 @@ export default {
                     `http://localhost:9000/getPairing?query=${this.foodInput}`
                 );
                 this.wineRec = response.data;
-                console.log(response.data); // Log the response to the console
+                console.log(response.data);
             } catch (error) {
                 this.wineRec = null;
+                this.invalidSearch = this.foodInput;
                 if (error.response.status === 500) {
                     console.error('Invalid search criteria.');
                 } else {

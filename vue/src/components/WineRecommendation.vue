@@ -30,8 +30,8 @@
         </div>
 
 
-        <div v-if="searchPerformed && (wineRec === null || wineRec.wines.length === 0)" >
-            <p>Sorry, we don't have any recommendations for your search.</p>
+        <div v-if="searchPerformed && (wineRec === null || wineRec.wines.length === 0)">
+            <p>Sorry, we don't have any recommendations for "{{ invalidSearch }}".</p>
         </div>
 
 
@@ -51,6 +51,14 @@ export default {
             type: Boolean,
             default: false,
         },
+        foodInput: {
+            type: String,
+            default: '',
+        },
+        invalidSearch: {
+            type: String,
+            default: '',
+        }
     },
     methods: {
         capitalize: function (value) {
