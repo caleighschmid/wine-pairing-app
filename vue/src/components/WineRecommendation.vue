@@ -30,7 +30,7 @@
         </div>
 
 
-        <div v-if="wineRec.wines.length === 0">
+        <div v-if="searchPerformed && (wineRec === null || wineRec.wines.length === 0)" >
             <p>Sorry, we don't have any recommendations for your search.</p>
         </div>
 
@@ -46,6 +46,10 @@ export default {
         wineRec: {
             type: Object,
             default: () => ({}), // Default to an empty object
+        },
+        searchPerformed: {
+            type: Boolean,
+            default: false,
         },
     },
     methods: {

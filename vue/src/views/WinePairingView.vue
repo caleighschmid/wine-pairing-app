@@ -8,7 +8,7 @@
             <br>
             <button v-on:click="fetchWineRecommendation">Get Wine Pairings</button>
 
-            <WineRecommendation :wineRec="wineRec" />
+            <WineRecommendation :wineRec="wineRec" :searchPerformed="searchPerformed" />
 
 
         </div>
@@ -28,18 +28,25 @@ export default {
         return {
             foodInput: 'Italian', // Default value, you can set it to an empty string if you prefer
             wineRec: null,
+            searchPerformed: false,
         };
     },
     methods: {
         async fetchWineRecommendation() {
+            this.searchPerformed = true;
             try {
                 const response = await axios.get(
                     `http://localhost:9000/getPairing?query=${this.foodInput}`
                 );
-                console.log(response.data); // Log the response to the console
                 this.wineRec = response.data;
+                console.log(response.data); // Log the response to the console
             } catch (error) {
-                console.error('Error fetching wine recommendation:', error);
+                this.wineRec = null;
+                if (error.response.status === 500) {
+                    console.error('Invalid search criteria.');
+                } else {
+                    console.error('Error fetching wine recommendation:', error);
+                }
             }
         },
     },
