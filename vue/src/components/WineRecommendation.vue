@@ -30,7 +30,7 @@
         </div>
 
 
-        <div v-if="searchPerformed && (wineRec === null || wineRec.wines.length === 0)">
+        <div v-if="searchPerformed && invalidSearch && (wineRec === null || wineRec.wines.length === 0)">
             <p>Sorry, we don't have any recommendations for "{{ invalidSearch }}".</p>
         </div>
 
