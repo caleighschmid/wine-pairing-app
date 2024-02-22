@@ -23,3 +23,5 @@ TO wine_app_appuser;
 GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
 TO wine_app_appuser;
+
+GRANT SELECT ON TABLE saved_wines TO wine_app_appuser;

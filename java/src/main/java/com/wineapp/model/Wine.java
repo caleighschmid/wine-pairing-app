@@ -1,6 +1,5 @@
 package com.wineapp.model;
 
-import java.math.BigDecimal;
 
 public class Wine {
 
