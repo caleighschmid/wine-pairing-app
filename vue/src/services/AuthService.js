@@ -8,6 +8,14 @@ export default {
 
   register(user) {
     return axios.post('/register', user)
+  },
+
+  saveWine(wine) {
+    return axios.post('/wines/addWine', wine)
+  },
+
+  getSavedWines() {
+    return axios.get('/wines/saved')
   }
 
 }

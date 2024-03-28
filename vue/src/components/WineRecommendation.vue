@@ -23,6 +23,13 @@
                     <h3>Our Recommendation</h3>
                     <h4>{{ wineRec.specificRec.title }}</h4>
                     <img :src="wineRec.specificRec.imageUrl" alt="Wine Image" />
+                    <div>
+                        <span>
+                        <button v-on:click="saveWine">Save Wine to Favorites</button>&nbsp;
+                        <button>Find Online</button>
+                    </span>
+                    </div>
+                    
                     <p>{{ wineRec.specificRec.description }}</p>
                     <p>${{ formatPrice(wineRec.specificRec.price) }}</p>
                 </div>
@@ -41,6 +48,9 @@
 
 
 <script>
+import { useLink } from 'vue-router';
+import AuthService from '../services/AuthService';
+
 export default {
     props: {
         wineRec: {
@@ -72,6 +82,26 @@ export default {
 
             return isNaN(numericPrice) ? 'N/A' : numericPrice.toFixed(2);
         },
+        saveWine() {
+            let newWine = {
+                title: this.wineRec.specificRec.title,
+                averageRating: this.wineRec.specificRec.averageRating,
+                description: this.wineRec.specificRec.description,
+                imageUrl: this.wineRec.specificRec.imageUrl,
+                link: this.wineRec.specificRec.link,
+                price: this.wineRec.specificRec.price,
+                ratingCount: this.wineRec.specificRec.ratingCount,
+                score: this.wineRec.specificRec.score
+            }
+            AuthService.saveWine(newWine)
+            .then((response) => {
+                if (response.status === 200) {
+                    alert("Wine saved successfully.");
+                }
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
     },
 };
 </script>
