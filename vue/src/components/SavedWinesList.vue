@@ -3,8 +3,8 @@
         <h1>My Saved Wines</h1>
         <ul>
             <li v-for="wine in savedArray" :key="wine.title">
-            <div>{{ wine.title }}</div>
-            <img :src="wine.imageUrl" alt="Wine Image">
+                <div id="wine-title">{{ wine.title }}</div>
+                <img :src="wine.imageUrl" alt="Wine Image" @error="handleImageError">
             </li>
         </ul>
     </div>
@@ -12,19 +12,29 @@
 
 <script>
 import AuthService from '../services/AuthService';
+import fallbackImageUrl from '@/assets/generic_wine_image.png';
 
 export default {
     data() {
         return {
             savedArray: [],
+            fallbackImageUrl: fallbackImageUrl,
         }
     },
     created() {
         AuthService.getSavedWines()
-        .then((response) => {
-            console.log(response.data);
-            this.savedArray = response.data;
-        })
+            .then((response) => {
+                console.log(response.data);
+                this.savedArray = response.data;
+            })
+            .catch((error) => {
+                console.error('Error fetching saved wines:', error);
+            });
+    },
+    methods: {
+        handleImageError(event) {
+            event.target.src = this.fallbackImageUrl;
+        }
     }
 }
 
@@ -32,8 +42,7 @@ export default {
 </script>
 
 <style>
-
-h1{
+h1 {
     text-align: center;
     padding-top: 10px;
 }
@@ -61,11 +70,20 @@ li {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
-li:hover{
+li:hover {
     background-color: rgb(255, 180, 155);
 }
 
+img {
+    max-width: 100%;
+}
+
+#wine-title {
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
 </style>

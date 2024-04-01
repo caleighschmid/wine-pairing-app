@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 @Component
@@ -26,7 +27,7 @@ public class JdbcWineDao implements WineDao {
         String sql = "SELECT * FROM saved_wines WHERE user_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-            if (results.next()) {
+            while (results.next()) {
                 Wine wine = mapRowToWine(results);
                 savedWines.add(wine);
             }
@@ -58,7 +59,7 @@ public class JdbcWineDao implements WineDao {
 
     @Override
     public Wine saveWine(Wine wine, int userId) {
-        Wine newWine = null;
+        Wine newWine;
 
         String sql = "INSERT INTO saved_wines (user_id, title, average_rating, description, image_url, link, price, rating_count, score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING wine_id;";
 

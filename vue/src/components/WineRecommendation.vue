@@ -22,14 +22,18 @@
                 <div class="recommendation">
                     <h3>Our Recommendation</h3>
                     <h4>{{ wineRec.specificRec.title }}</h4>
-                    <img :src="wineRec.specificRec.imageUrl" alt="Wine Image" />
+                    <img :src="wineRec.specificRec.imageUrl" alt="Wine Image" @error="handleImageError" />
                     <div>
                         <span>
-                        <button v-on:click="saveWine">Save Wine to Favorites</button>&nbsp;
-                        <button>Find Online</button>
-                    </span>
+                            <button v-on:click="saveWine" v-if="$store.state.token != ''">Save Wine to
+                                Favorites</button>
+                            <button v-on:click="goToSignIn" v-if="$store.state.token === ''">Sign in to Save
+                                Wine</button>
+                            &nbsp;
+                            <button>Find Online</button>
+                        </span>
                     </div>
-                    
+
                     <p>{{ wineRec.specificRec.description }}</p>
                     <p>${{ formatPrice(wineRec.specificRec.price) }}</p>
                 </div>
@@ -50,6 +54,7 @@
 <script>
 import { useLink } from 'vue-router';
 import AuthService from '../services/AuthService';
+import fallbackImageUrl from '@/assets/generic_wine_image.png';
 
 export default {
     props: {
@@ -68,6 +73,11 @@ export default {
         invalidSearch: {
             type: String,
             default: '',
+        }
+    },
+    data() {
+        return {
+            fallbackImageUrl: fallbackImageUrl,
         }
     },
     methods: {
@@ -94,14 +104,20 @@ export default {
                 score: this.wineRec.specificRec.score
             }
             AuthService.saveWine(newWine)
-            .then((response) => {
-                if (response.status === 200) {
-                    alert("Wine saved successfully.");
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
+                .then((response) => {
+                    if (response.status === 200) {
+                        alert("Wine saved successfully.");
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                })
+        },
+        goToSignIn() {
+            this.$router.push('/login');
+        },
+        handleImageError(event) {
+            event.target.src = this.fallbackImageUrl;
+        },
     },
 };
 </script>
@@ -134,5 +150,6 @@ export default {
 .recommendation img {
     max-width: 100%;
     height: auto;
+    max-height:max-content
 }
 </style>
