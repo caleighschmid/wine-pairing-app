@@ -1,7 +1,5 @@
 # Wine Buddy
 ​
-This is the Vue starter project for the final capstone. This document walks you through how to set up and run the project. It also explains the project's features, such as Vue Router, Vuex, and authentication.
-​
 ## Project setup
 ​
 The first thing you'll need to do is to download any dependencies by running this command:
