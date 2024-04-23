@@ -1,4 +1,4 @@
-# Capstone Starter Project
+# Wine Buddy
 
 ## Database
 
