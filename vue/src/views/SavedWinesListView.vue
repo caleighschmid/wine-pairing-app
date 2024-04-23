@@ -1,5 +1,9 @@
 <template>
-    <saved-wines-list />
+    <div>
+        <div class="main">
+            <saved-wines-list />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -12,4 +16,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(40, 43, 47);
+}
+</style>

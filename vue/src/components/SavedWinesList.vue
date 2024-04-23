@@ -41,18 +41,20 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 h1 {
     text-align: center;
     padding-top: 10px;
+    color: rgb(255, 180, 155);
 }
+
 
 ul {
     list-style: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    padding-left: 80px;
+    /* padding-left: 80px; */
 }
 
 li {
@@ -68,13 +70,14 @@ li {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: inherit;
+    color: rgb(255, 180, 155);
     cursor: pointer;
     font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 li:hover {
     background-color: rgb(255, 180, 155);
+    color: rgb(40, 43, 47);
 }
 
 img {
