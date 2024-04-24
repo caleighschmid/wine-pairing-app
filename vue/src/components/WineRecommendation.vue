@@ -35,7 +35,9 @@
                     </div>
 
                     <p>{{ wineRec.specificRec.description }}</p>
-                    <p>${{ formatPrice(wineRec.specificRec.price) }}</p>
+                    <div id="price-div">
+                        <p id="price">${{ formatPrice(wineRec.specificRec.price) }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,8 +126,13 @@ export default {
 
 <style scoped>
 .section-title {
-    font-size: 24px;
+    font-size: 27px;
     margin-bottom: 10px;
+    padding: 10px;
+    /* background-color: #1A615F;
+    color: #f4eaeb; */
+    /* border-bottom: #0d3231 3px solid; */
+
 }
 
 .pairings-list {
@@ -135,7 +142,7 @@ export default {
 }
 
 .pairings-list li {
-    background-color: #f5f5f5;
+    background-color: #ebd8db;
     padding: 8px;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -150,6 +157,24 @@ export default {
 .recommendation img {
     max-width: 100%;
     height: auto;
-    max-height:max-content
+    max-height: 350px;
 }
+
+#price {
+    background-color: #e2ced0;
+    margin-left: 240px;
+    margin-right: 240px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+
+#price-div{
+    /* width: 100px;
+    height: 30px;
+    background-color: #BBABAD; */
+    /* display: flex;
+    flex-direction: column; */
+}
+
 </style>

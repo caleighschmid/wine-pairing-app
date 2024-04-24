@@ -26,10 +26,11 @@
   Rose quartz: #BBABAD
   Dutch White: #F6E1C0
   Mint green: #D0F0ED
+  rgb(255, 180, 155)
 */
 
 .router-link{
-  color: rgb(255, 180, 155);
+  color: #BBABAD;
   text-decoration: none;
 }
 
@@ -38,7 +39,7 @@
 }
 
 .router-dash{
-  color: rgb(255, 180, 155);
+  color: #BBABAD;
 }
 
 body {
